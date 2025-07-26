@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+.item-nav-mid {
+    @apply mr-4 border border-transparent text-white hover:border-white rounded-sm px-2 py-1;
+}
+
+.itens-search {
+    @apply text-gray-800 hover:text-orange-600 py-1;
+}
+
+.itens-click {
+    @apply rounded md:w-22 mb-2;
+}
+
+.rodape {
+    @apply mb-2 text-gray-400 hover:underline leading-4 py-1;
+}
+
+@layer utilities {
+    .darkblue {
+        background-color: rgb(24, 24, 43);
+    }
+
+    .darkblue-extra {
+        background-color: rgb(13, 13, 29);
+    }
+
+    .darkblue-subheader:hover {
+        background-color: rgb(41, 41, 66);
+    }
+
+    .darkblue-subheader {
+        background-color: rgb(61, 61, 102);
+    }
+
+    .borda-escura {
+        border-color: rgb(99, 97, 97);
+    }
+
+    .darkblue-contagem {
+        background-color: rgb(2, 2, 24);
+    }
+
+    .text-darkblue {
+        color: rgb(1, 1, 22);
+    }
+}
