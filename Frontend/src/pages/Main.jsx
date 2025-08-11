@@ -65,7 +65,7 @@ const Main = () => {
           frete GRÀTIS sem valor mínimo de compra e muito mais. Apenas R$ 9,90/mês.
         </p>
         <Link to='/' className="text-sm md:text-xs bg-yellow-300 border border-yellow-700 rounded px-3 py-3 md:py-0 md:ml-10 h-12 md:h-8 block md:flex items-center w-full md:w-auto text-center">
-          Teste GRÀtis por 30 dias
+          Teste GRÀTIS por 30 dias
         </Link>
       </div>
 

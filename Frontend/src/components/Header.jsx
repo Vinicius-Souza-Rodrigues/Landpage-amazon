@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import image from '../assets/img/amazon_logo.png'
 import { Link } from "react-router-dom";
 
 const Header = () => {
+
+  const [user, setUser] = useState("")
+  
   return (
     <header>
       <div className="grid text-white">
@@ -11,7 +15,7 @@ const Header = () => {
           </div>
 
           <div className="flex mx-2 py-2 p-1 border border-transparent hover:border-white">
-            <img src={image} alt="amazon" className="h-[1.7rem]" />
+            <img src={image} alt="amazon" className="h-[1.7rem] cursor-pointer" />
             <span className="text-xs pl-1 pt-1">.com.br</span>
           </div>
 
@@ -27,11 +31,54 @@ const Header = () => {
             </form>
           </div>
 
-          <div className="hidden md:block ml-1 pb-1 text-xs border border-transparent hover:border-white rounded-sm p-2">
-            <p className="leading-3">Olá, Faça seu login</p>
-            <p className="font-extrabold">
-              Contas e Listas <i className="fas fa-chevron-down"></i>
-            </p>
+          <div className="relative group hidden md:block ml-1 pb-1 text-xs border border-transparent hover:border-white rounded-sm p-2">
+            <div>
+              <p className="leading-3">Olá, {user ? user : "Faça seu login"}</p>
+              <p className="font-extrabold">
+                Contas e Listas <i className="fas fa-chevron-down"></i>
+              </p>
+              
+
+              <div className="absolute top-full left-1/2 flex-col -translate-x-1/2 py-2 px-2 w-max min-w-[430px] max-w-[500px] bg-white shadow-xl text-black rounded hidden group-hover:block">
+                <div className='border-b border-b-gray-300 p-1 w-auto flex flex-col justify-center items-center'>
+                  <Link to={'/login'} className='bg-amber-400 py-2 px-16 rounded-md shadow-md text-sm hover:underline'>
+                    Faça seu login
+                  </Link>
+                  <p className='my-2 text-gray-700'>Cliente novo? <Link to={'/'} className='text-blue-500 underline hover:text-amber-500'>Comece aqui</Link></p>
+                </div>
+
+                <div className='flex'>
+                  <div className='my-3 px-3 border-r border-r-gray-300'>
+                    <h3 className='text-lg font-bold mb-1'>Suas listas</h3>
+                    <ul className='flex flex-col gap-2 text-[14px] text-gray-700'>
+                      <li className='hover:text-amber-500 hover:underline'><Link to={'/'}>Criar uma Lista de desejos</Link></li>
+                      <li className='hover:text-amber-500 hover:underline'><Link to={'/'}>Lista do Bebê</Link></li>
+                    </ul>
+                  </div>
+
+                  <div className='py-2 px-3'>
+                    <h3 className='text-lg font-bold mb-1'>Sua Conta</h3>
+                    <ul className='flex flex-col gap-2 text-[14px] text-gray-700'>
+                      <li><Link to={'/'} className='hover:text-amber-500 hover:underline'>Sua conta</Link></li>
+                      <li><Link to={'/'} className='hover:text-amber-500 hover:underline'>Seus pedidos</Link></li>
+                      <li><Link to={'/'} className='hover:text-amber-500 hover:underline'>Sua Lista de desejos</Link></li>
+                      <li><Link to={'/'} className='hover:text-amber-500 hover:underline'>Continuar comprando</Link></li>
+                      <li><Link to={'/'} className='hover:text-amber-500 hover:underline'>Recomendados para você</Link></li>
+                      <li><Link to={'/'} className='hover:text-amber-500 hover:underline'>Programe e Poupe</Link></li>
+                      <li><Link to={'/'} className='hover:text-amber-500 hover:underline'>Sua assinatura Prime</Link></li>
+                      <li><Link to={'/'} className='hover:text-amber-500 hover:underline'>Inscrições e assinaturas</Link></li>
+                      <li><Link to={'/'} className='hover:text-amber-500 hover:underline'>Gerencie seu conteúdo e dispositivos</Link></li>
+                      <li><Link to={'/'} className='hover:text-amber-500 hover:underline'>Seu Prime Video</Link></li>
+                      <li><Link to={'/'} className='hover:text-amber-500 hover:underline'>Seu Kindle Unlimited</Link></li>
+                      <li><Link to={'/'} className='hover:text-amber-500 hover:underline'>Seu Amazon Photos</Link></li>
+                      <li><Link to={'/'} className='hover:text-amber-500 hover:underline'>Seus aplicativos e dispositivos</Link></li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
           </div>
 
           <div className="hidden md:block pb-1 text-xs border border-transparent hover:border-white rounded-sm p-2">
@@ -58,7 +105,7 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="flex darkblue-subheader text-sm px-2 py-1.5 items-center">
+      <div className="flex darkblue-subheaderr text-sm px-2 py-1.5 items-center">
         <div className="flex items-center border border-transparent hover:border-white rounded-sm px-2 py-2 md:py-0">
           <div className="mr-1">
             <i className="fas fa-map-marker-alt text-xl text-white"></i>

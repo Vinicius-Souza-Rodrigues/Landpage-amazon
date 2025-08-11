@@ -1,26 +1,31 @@
-import { useState } from 'react'
-import './App.css'
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-//components
-import Header from './components/Header'
-import Home from './components/Home'
-import Main from './components/Main'
-import Produto from './components/Produto'
-import Footer from './components/Footer'
+// Layouts
+import DefaultLayout from './layouts/DefaultLayout'
+import EmptyLayout from './layouts/EmptyLayout'
+
+// Pages
+import Home from './pages/Home'
+import Main from './pages/Main'
+import Produto from './pages/Produto'
+import Login from './pages/Login'
+import Tesste from './components/tesste'
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
-        <Route path='/' element={<Home />}>
-          <Route path="/" element={<Main />} />
-          <Route path="/teste" element={<Produto />} />
+        <Route element={<DefaultLayout />}>
+          <Route path="/" element={<Home />}>
+            <Route index element={<Main />} />
+          </Route>
+            <Route path="/teste" element={<Tesste />} />
+        </Route>
+        
+        <Route element={<EmptyLayout />}>
+          <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
-      <Footer />
     </BrowserRouter>
   )
 }

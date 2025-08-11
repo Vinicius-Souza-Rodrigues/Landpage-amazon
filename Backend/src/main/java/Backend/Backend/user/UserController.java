@@ -2,6 +2,7 @@ package Backend.Backend.user;
 
 import Backend.Backend.config.Security.TokenService;
 import Backend.Backend.user.DTO.JWTReponseDto;
+import Backend.Backend.user.DTO.PegarLoginDto;
 import Backend.Backend.user.DTO.UserLoginDto;
 import Backend.Backend.user.DTO.UserRegisterDto;
 import jakarta.validation.Valid;
@@ -9,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -24,6 +23,9 @@ public class UserController {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private TokenService tokenService;
@@ -50,5 +52,14 @@ public class UserController {
         this.repository.save(newuser);
 
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/pegaremail")
+    public ResponseEntity<String> pegarEmail(@RequestBody PegarLoginDto request) {
+        String user = userService.verificarUser(request.login());
+
+        System.out.println("teste" + user);
+
+        return ResponseEntity.ok(user);
     }
 }
