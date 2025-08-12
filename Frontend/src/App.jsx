@@ -10,6 +10,7 @@ import Main from './pages/Main'
 import Produto from './pages/Produto'
 import Login from './pages/Login'
 import Tesste from './components/tesste'
+import Register from './pages/Register'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         
         <Route element={<EmptyLayout />}>
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
     </BrowserRouter>

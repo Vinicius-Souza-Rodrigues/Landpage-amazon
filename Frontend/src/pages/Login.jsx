@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { checkLoginExists, reset } from '../slices/UserSlice'
+import { checkLoginExists, loginPrime, reset } from '../slices/UserSlice'
 import image from '../assets/img/amazon_logo.svg.png'
 
 const Login = () => {
@@ -11,11 +11,25 @@ const Login = () => {
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
-  const { loading, userEmail, error } = useSelector(state => state.user)
+  const navigate = useNavigate()
+  const { loading, userEmail, token, error } = useSelector(state => state.user)
+
+  const logim = {
+    "login": login,
+    "password": password,
+    "role": "USER"
+  }
+
+  useEffect(() => {
+    if (token != null) {
+      console.log(token)
+      navigate('/')
+    }
+  }, [token, navigate])
 
   useEffect(() => {
     dispatch(reset())
-  }, [dispatch])
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -24,16 +38,7 @@ const Login = () => {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault()
-    console.log("Enviar login e senha para autenticar")
-  }
-
-  const refresh = (e) => {
-    res
-  }
-
-  const handleRegisterSubmit = (e) => {
-    e.preventDefault()
-    console.log("Enviar dados para registro")
+    dispatch(loginPrime(logim))
   }
 
   return (
@@ -93,13 +98,18 @@ const Login = () => {
 
           {userEmail == 'not-found' && (
             <>
-              <h2 className='text-xl'>Parece que você é novo na Amazon</h2>
+              <h2 className='text-xl mb-4'>Parece que você é novo na <br/>Amazon</h2>
 
-              <p>{precaucao || 'null' } <span className=''>Alterar</span></p>
+              <p className='flex gap-6 mb-4'>{precaucao} <span className='text-blue-500 hover:underline hover:text-blue-900 cursor-pointer'>Alterar</span></p>
 
-              <p>Vamos criar uma conta usando seu e-mail</p>
-              <Link to={"/register"} className='bg-yellow-300 rounded-2xl p-1 mt-4 mb-4 hover:bg-amber-300 active:bg-amber-400 text-center'>Prossiga com a criação de uma conta</Link>
+              <p className='mb-2'>Vamos criar uma conta usando seu e-mail</p>
+              <Link to={"/register"} className='bg-yellow-300 rounded-2xl text-sm p-1 pt-2 pb-2 hover:bg-amber-300 active:bg-amber-400 text-center'>Prossiga com a criação de uma conta</Link>
               
+              <div className='mt-5 border-t-2 border-gray-200'>
+                <h3 className='font-bold text-sm mt-4 mb-2'>Já é cliente?</h3>
+
+                <Link to={"/"} className='text-blue-500 hover:underline hover:text-blue-900 '>Faça login com outro e-mail ou celular</Link>
+              </div>
             </>
           )}
 
@@ -110,7 +120,7 @@ const Login = () => {
               <p className=''>{userEmail || 'null'} <span className='text-blue-500 cursor-pointer hover:underline'>Alterar</span></p>
               
               <form onSubmit={handleLoginSubmit} className='flex flex-col'>
-                <label htmlFor='passwword' className='flex gap-40 font-bold text-sm mt-4'>
+                <label htmlFor='password' className='flex gap-40 font-bold text-sm mt-4'>
                   Senha
 
                   <span className='text-blue-500 font-normal cursor-pointer hover:underline hover:text-blue-900'>Esqueci a senha</span>
